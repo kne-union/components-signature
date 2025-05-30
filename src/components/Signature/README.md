@@ -16,9 +16,9 @@
 - _Signature(@components/Signature)
 
 ```jsx
-const {default:Signature} = _Signature;
-const BaseExample = ()=>{
-    return <Signature />;
+const { default: Signature } = _Signature;
+const BaseExample = () => {
+  return <Signature />;
 };
 
 render(<BaseExample />);
