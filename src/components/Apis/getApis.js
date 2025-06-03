@@ -16,7 +16,7 @@ const getApis = options => {
     },
     remove: {
       method: 'POST',
-      url: `${prefix}/delete`
+      url: `${prefix}/remove`
     },
     verify: {
       method: 'POST',
