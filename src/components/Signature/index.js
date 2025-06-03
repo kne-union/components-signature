@@ -111,7 +111,7 @@ const Signature = createWithRemoteLoader({
                             result: false,
                             errMsg: '请输入数字'
                           };
-                        },
+                        }
                       },
                       data: { appId: item.appId, ...item },
                       onSubmit: async data => {
@@ -129,21 +129,34 @@ const Signature = createWithRemoteLoader({
                         ref.current.reload();
                       }
                     },
-                    children: <FormInfo column={1} list={[
-                      <Input name="timestamp" label="时间戳" rule="REQ NUM" />,
-                      <TextArea name="signature" label="签名" rule="REQ" />,
-                      <Input name="expire" label="过期时间" rule="REQ NUM" />,
-                    ]} />
+                    children: (
+                      <FormInfo
+                        column={1}
+                        list={[
+                          <TextArea name="signature" label="签名" rule="REQ" />,
+                          <Input name="timestamp" label="时间戳" rule="REQ NUM" />,
+                          <Input name="expire" label="过期时间" rule="REQ NUM" />
+                        ]}
+                      />
+                    )
                   });
                 }
               },
               {
                 children: item.status === 0 ? '禁用' : '启用',
                 title: '温馨提示',
-                message: <div>
-                  <div>禁用此密钥后，腾讯云将拒绝此密钥的所有请求。</div>
-                  <div>是否确定要禁用此密钥？</div>
-                </div>,
+                message:
+                  item.status === 0 ? (
+                    <div>
+                      <div>禁用此密钥后，将拒绝此密钥的所有请求。</div>
+                      <div>是否确定要禁用此密钥？</div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div>启用此密钥后，将允许此密钥访问请求。</div>
+                      <div>是否确定要启用此密钥？</div>
+                    </div>
+                  ),
                 isModal: true,
                 isDelete: false,
                 onClick: async () => {
@@ -176,8 +189,8 @@ const Signature = createWithRemoteLoader({
                   message.success('删除成功');
                   ref.current.reload();
                 }
-              },
-            ]
+              }
+            ];
           }
         }
       ]}
